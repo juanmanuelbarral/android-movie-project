@@ -5,7 +5,3 @@ data class Movie (
     val title: String,
     val posterPath: String
 )
-
-data class PopularMoviesResponse (
-    val results: List<Movie>
-)
