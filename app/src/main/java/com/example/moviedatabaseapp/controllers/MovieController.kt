@@ -32,7 +32,6 @@ class MovieController {
     }
 
     fun loadMovieDetais(movieId: Int) {
-        Log.d("Test", "loadMovieDetails")
         ModelManager.getMovieDetails(
                 movieId,
                 onCompletion = { movie, error ->
