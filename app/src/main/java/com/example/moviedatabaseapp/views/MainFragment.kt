@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment: Fragment() {
 
-    private val controller: MainFragmentController = MainFragmentController()
+    private val controller = MainFragmentController()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
@@ -21,6 +21,7 @@ class MainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        controller.loadMovieDetais(320288)
 
         controller.movie.observe(this, Observer { newMovie ->
             if (newMovie != null) {
@@ -46,7 +47,11 @@ class MainFragment: Fragment() {
         }
 
         popularMoviesButton.setOnClickListener {
-            // Navigation to PopularMoviesFragment
+            // Navigation to PopularFragment
+            fragmentManager!!.beginTransaction()
+                .replace(R.id.mainActivityContainer, PopularFragment())
+                .addToBackStack(null)
+                .commit()
         }
     }
 }
