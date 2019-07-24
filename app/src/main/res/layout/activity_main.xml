@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".views.MainActivity">
 
     <android.support.constraint.Guideline
         android:id="@+id/middleGuideline"
@@ -44,5 +44,39 @@
         android:text="Movie Title"
         app:layout_constraintStart_toEndOf="@+id/moviePosterImage"
         app:layout_constraintTop_toTopOf="@+id/moviePosterImage" />
+
+    <Button
+        android:id="@+id/darkPhoenixButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Dark Phoenix"
+        app:layout_constraintEnd_toStartOf="@+id/endgameButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moviePosterImage" />
+
+    <Button
+        android:id="@+id/endgameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Endgame"
+        app:layout_constraintBottom_toBottomOf="@+id/darkPhoenixButton"
+        app:layout_constraintEnd_toStartOf="@+id/detectivePikachuButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/darkPhoenixButton"
+        app:layout_constraintTop_toTopOf="@+id/darkPhoenixButton" />
+
+    <Button
+        android:id="@+id/detectivePikachuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detective Pikachu"
+        app:layout_constraintBottom_toBottomOf="@+id/endgameButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/endgameButton"
+        app:layout_constraintTop_toTopOf="@+id/endgameButton" />
 
 </android.support.constraint.ConstraintLayout>
