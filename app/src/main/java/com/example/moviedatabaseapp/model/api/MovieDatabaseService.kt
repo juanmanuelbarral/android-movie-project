@@ -7,11 +7,12 @@ import retrofit2.http.Path
 
 interface MovieDatabaseService {
 
-    @GET("/movie/popular")
+    @GET("movie/popular")
     suspend fun getPopularMovies(): Response<List<Movie>>
 
-    @GET("/movie/{movieId}")
+    @GET("movie/{movieId}")
     suspend fun getMovieDetails(
         @Path("movieId") movieId: Int
     ): Response<Movie>
+
 }

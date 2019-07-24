@@ -7,7 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitFactory {
 
-    private const val BASE_URL = "https://api.themoviedb.org/3"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
     private const val API_KEY = "a96994d867a6bbedf3fab3d61dda712c"
     private const val LANGUAGE = "en-US"
 

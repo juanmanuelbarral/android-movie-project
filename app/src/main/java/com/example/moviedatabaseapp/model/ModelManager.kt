@@ -33,11 +33,13 @@ object ModelManager {
     }
 
     fun getMovieDetails(movieId: Int, onCompletion: (movie: Movie?, error: String?) -> Unit) {
+        Log.d("TestModelManager", "getMovieDetails")
         CoroutineScope(Dispatchers.IO).launch {
             val response = movieDatabaseService.getMovieDetails(movieId)
             withContext(Dispatchers.Main) {
                 try {
                     if (response.isSuccessful) {
+                        Log.d("TestModelManager", "getMovieDetails - SUCCESS - ${response.body()?.title}")
                         onCompletion(response.body(), null)
                     } else {
                         onCompletion(null, "Get movie details request was unsuccessful")
