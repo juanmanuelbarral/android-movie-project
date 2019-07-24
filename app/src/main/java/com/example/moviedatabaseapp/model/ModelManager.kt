@@ -19,7 +19,8 @@ object ModelManager {
             withContext(Dispatchers.Main) {
                 try {
                     if (response.isSuccessful) {
-                        onCompletion(response.body(), null)
+                        val popularMovies = response.body()?.results
+                        onCompletion(popularMovies, null)
                     } else {
                         onCompletion(null, "Get popular movies request was unsuccessful")
                     }

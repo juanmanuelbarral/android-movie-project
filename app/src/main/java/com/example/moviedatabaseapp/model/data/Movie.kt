@@ -7,3 +7,7 @@ data class Movie (
     val title: String,
     @field:Json(name = "poster_path") var posterPath: String = ""
 )
+
+data class ResponsePopularMovies(
+    val results: List<Movie>
+)
