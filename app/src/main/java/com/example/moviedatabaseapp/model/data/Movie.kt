@@ -1,7 +1,9 @@
 package com.example.moviedatabaseapp.model.data
 
+import com.squareup.moshi.Json
+
 data class Movie (
-    val movieId: Int,
+    @field:Json(name = "id") val movieId: Int,
     val title: String,
-    val posterPath: String
+    @field:Json(name = "poster_path") var posterPath: String = ""
 )
