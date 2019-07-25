@@ -24,9 +24,7 @@ class MovieFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         controller.movie.observe(this, Observer { movie ->
-
-            val baseUrlPhoto = "https://image.tmdb.org/t/p/w500"
-            val url = baseUrlPhoto + movie!!.posterPath
+            val url = movie!!.posterUrl()
             Glide.with(this).load(url).into(moviePosterImage)
         })
     }

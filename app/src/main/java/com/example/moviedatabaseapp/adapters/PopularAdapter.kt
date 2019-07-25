@@ -52,8 +52,7 @@ class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolder
         fun bind(movie: Movie) {
             this.movie = movie
 
-            val baseUrlPhoto = "https://image.tmdb.org/t/p/w500"
-            val url = baseUrlPhoto + movie.posterPath
+            val url = movie.posterUrl()
             Glide.with(parent.context).load(url).into(itemView.itemMoviePosterImage)
 
             itemView.itemMovieTitleLabel.text = movie.title
