@@ -26,8 +26,7 @@ class MainFragment: Fragment() {
         controller.movie.observe(this, Observer { newMovie ->
             if (newMovie != null) {
                 movieTitleLabel.text = newMovie.title
-                val baseUrlPhoto = "https://image.tmdb.org/t/p/w500"
-                val url = baseUrlPhoto + newMovie.posterPath
+                val url = newMovie.posterUrl()
                 Glide.with(this)
                     .load(url)
                     .into(moviePosterImage)
