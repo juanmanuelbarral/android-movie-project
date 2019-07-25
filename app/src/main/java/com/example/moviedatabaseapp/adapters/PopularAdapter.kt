@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.moviedatabaseapp.R
+import com.example.moviedatabaseapp.databinding.ItemMovieBinding
 import com.example.moviedatabaseapp.model.data.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolder>() {
+class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolderA>() {
 
     private var data: List<Movie> = arrayListOf()
     private var actionDelegate: PopularActionDelegate? = null
@@ -22,18 +23,42 @@ class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolder
         this.actionDelegate = delegate
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolderA {
         val inflater = LayoutInflater.from(parent.context)
-        return PopularMovieViewHolder(inflater, parent)
+        val binding = ItemMovieBinding.inflate(inflater, parent, false)
+        return PopularMovieViewHolderA(binding)
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    override fun onBindViewHolder(holder: PopularMovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PopularMovieViewHolderA, position: Int) {
         val movie: Movie = data[position]
         holder.bind(movie)
+    }
+
+    inner class PopularMovieViewHolderA constructor(private val binding: ItemMovieBinding)
+        : RecyclerView.ViewHolder(binding.root) {
+
+        private var movie: Movie? = null
+
+        init {
+            binding.root.setOnClickListener {
+                if (movie != null && actionDelegate != null) {
+                    actionDelegate!!.onClickMovie(movie!!)
+                }
+            }
+        }
+
+        fun bind(movie: Movie) {
+            this.movie = movie
+
+            val url = movie.posterUrl()
+            Glide.with(binding.root.context).load(url).into(binding.itemMoviePosterImage)
+
+            binding.itemMovieTitleLabel.text = movie.title
+        }
     }
 
     inner class PopularMovieViewHolder(inflater: LayoutInflater, private var parent: ViewGroup)

@@ -1,6 +1,7 @@
 package com.example.moviedatabaseapp.views
 
 import android.arch.lifecycle.Observer
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -12,15 +13,23 @@ import android.view.ViewGroup
 import com.example.moviedatabaseapp.R
 import com.example.moviedatabaseapp.adapters.PopularAdapter
 import com.example.moviedatabaseapp.controllers.PopularController
-import kotlinx.android.synthetic.main.fragment_popular.*
+import com.example.moviedatabaseapp.databinding.FragmentPopularBinding
 
-class PopularFragment: Fragment() {
+class PopularFragment : Fragment() {
 
-    private val controller = PopularController()
+    private lateinit var binding: FragmentPopularBinding
     private lateinit var adapter: PopularAdapter
+    private val controller = PopularController()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_popular, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_popular,
+            container,
+            false
+        )
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,11 +37,16 @@ class PopularFragment: Fragment() {
         adapter = PopularAdapter()
         adapter.setData(controller.popularMovies.value!!)
         adapter.setActionDelegate(controller)
-        popularRecyclerView.layoutManager = GridLayoutManager(activity!!, 2, GridLayoutManager.HORIZONTAL, false)
-        popularRecyclerView.adapter = adapter
-        (popularRecyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+        binding.popularRecyclerView.layoutManager = GridLayoutManager(
+            activity!!,
+            2,
+            GridLayoutManager.HORIZONTAL,
+            false
+        )
+        binding.popularRecyclerView.adapter = adapter
+        (binding.popularRecyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
 
-        controller.popularMovies.observe(this, Observer {movies ->
+        controller.popularMovies.observe(this, Observer { movies ->
             if (movies != null) {
                 adapter.setData(movies)
             } else {
@@ -40,7 +54,7 @@ class PopularFragment: Fragment() {
             }
         })
 
-        controller.navigateToMovie.observe(this, Observer {navigate ->
+        controller.navigateToMovie.observe(this, Observer { navigate ->
             if (navigate!!) {
                 val newMovieFragment = MovieFragment()
                 newMovieFragment.setMovie(controller.movieForNavigation!!)

@@ -1,6 +1,7 @@
 package com.example.moviedatabaseapp.views
 
 import android.arch.lifecycle.Observer
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,15 +10,23 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.moviedatabaseapp.R
 import com.example.moviedatabaseapp.controllers.MovieController
+import com.example.moviedatabaseapp.databinding.FragmentMovieBinding
 import com.example.moviedatabaseapp.model.data.Movie
-import kotlinx.android.synthetic.main.fragment_movie.*
 
-class MovieFragment: Fragment() {
+class MovieFragment : Fragment() {
 
+    private lateinit var binding: FragmentMovieBinding
     private val controller = MovieController()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movie, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_movie,
+            container,
+            false
+        )
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,7 +34,7 @@ class MovieFragment: Fragment() {
 
         controller.movie.observe(this, Observer { movie ->
             val url = movie!!.posterUrl()
-            Glide.with(this).load(url).into(moviePosterImage)
+            Glide.with(this).load(url).into(binding.moviePosterImage)
         })
     }
 
