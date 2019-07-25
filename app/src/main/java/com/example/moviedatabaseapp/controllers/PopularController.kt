@@ -13,8 +13,15 @@ class PopularController: PopularActionDelegate {
     val popularMovies: LiveData<List<Movie>>
         get() = _popularMovies
 
+    private val _navigateToMovie = MutableLiveData<Boolean>()
+    val navigateToMovie: LiveData<Boolean>
+        get() = _navigateToMovie
+
+    var movieForNavigation: Movie? = null
+
     init {
         _popularMovies.value = listOf()
+        _navigateToMovie.value = false
     }
 
     override fun onClickMovie(movie: Movie) {
@@ -22,10 +29,15 @@ class PopularController: PopularActionDelegate {
             if (movie != null) {
                 Log.d("TestPopularCon", "onClickMovie - movie success")
                 // Trigger navigation and pass this movie to the movie module (fragment, controller)
+                movieForNavigation = movie
+                _navigateToMovie.value = true
+
             } else {
                 Log.d("TestPopularCon", "onClickMovie - There was an error: $error")
             }
         })
+
+        // La otra opción es pasar el movie id por bundle y que se busque la película después en el movie controller
     }
 
     fun loadPopularMovies() {
@@ -36,5 +48,9 @@ class PopularController: PopularActionDelegate {
                 Log.d("TestPopularCon", "loadPopularMovies - There was an error: $error")
             }
         }
+    }
+
+    fun onNavigationToMovieDone() {
+        _navigateToMovie.value = false
     }
 }

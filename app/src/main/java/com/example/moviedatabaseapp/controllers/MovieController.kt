@@ -8,40 +8,28 @@ import com.example.moviedatabaseapp.model.data.Movie
 
 class MovieController {
 
-    private val _popularMovies = MutableLiveData<List<Movie>>()
-    val popularMovies: LiveData<List<Movie>>
-    get() = _popularMovies
-
     private val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie>
-    get() = _movie
+        get() = _movie
 
     init {
-        _popularMovies.value = listOf()
         _movie.value = null
     }
 
-    fun loadPopularMovies() {
-        ModelManager.getPopularMovies { movies, error ->
-            if (movies != null) {
-                _popularMovies.value = movies
-            } else {
-                Log.d("TestMovieContr", "loadPopularMovies - There was an error: $error")
-            }
-        }
+    fun onSetMovie(movie: Movie) {
+        _movie.value = movie
     }
 
     fun loadMovieDetais(movieId: Int) {
         ModelManager.getMovieDetails(
-                movieId,
-                onCompletion = { movie, error ->
-                    Log.d("Test", "on completion")
-                    if (movie != null) {
-                        _movie.value = movie
-                    } else {
-                        Log.d("TestMovieContr", "loadMovieDetails - There was an error: $error")
-                    }
+            movieId,
+            onCompletion = { movie, error ->
+                if (movie != null) {
+                    _movie.value = movie
+                } else {
+                    Log.d("TestMovieContr", "loadMovieDetails - There was an error: $error")
                 }
+            }
         )
     }
 }

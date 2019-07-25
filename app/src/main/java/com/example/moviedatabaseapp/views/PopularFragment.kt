@@ -40,6 +40,20 @@ class PopularFragment: Fragment() {
             }
         })
 
+        controller.navigateToMovie.observe(this, Observer {navigate ->
+            if (navigate!!) {
+                val newMovieFragment = MovieFragment()
+                newMovieFragment.setMovie(controller.movieForNavigation!!)
+
+                fragmentManager!!.beginTransaction()
+                    .replace(R.id.mainActivityContainer, newMovieFragment)
+                    .addToBackStack(null)
+                    .commit()
+
+                controller.onNavigationToMovieDone()
+            }
+        })
+
         controller.loadPopularMovies()
     }
 }
