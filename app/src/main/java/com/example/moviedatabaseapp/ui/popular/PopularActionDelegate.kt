@@ -1,4 +1,4 @@
-package com.example.moviedatabaseapp.adapters
+package com.example.moviedatabaseapp.ui.popular
 
 import com.example.moviedatabaseapp.model.data.Movie
 

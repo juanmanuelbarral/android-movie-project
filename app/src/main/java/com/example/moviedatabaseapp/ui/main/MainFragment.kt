@@ -1,4 +1,4 @@
-package com.example.moviedatabaseapp.views
+package com.example.moviedatabaseapp.ui.main
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.moviedatabaseapp.R
-import com.example.moviedatabaseapp.controllers.MainFragmentController
 import com.example.moviedatabaseapp.databinding.FragmentMainBinding
+import com.example.moviedatabaseapp.ui.popular.PopularFragment
 
 class MainFragment : Fragment() {
 

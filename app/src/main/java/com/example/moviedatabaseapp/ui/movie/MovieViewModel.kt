@@ -1,12 +1,13 @@
-package com.example.moviedatabaseapp.controllers
+package com.example.moviedatabaseapp.ui.movie
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.example.moviedatabaseapp.model.ModelManager
 import com.example.moviedatabaseapp.model.data.Movie
 
-class MovieController {
+class MovieViewModel: ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie>
@@ -14,6 +15,11 @@ class MovieController {
 
     init {
         _movie.value = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("MovieViewModel", "onCleared called")
     }
 
     fun onSetMovie(movie: Movie) {

@@ -1,4 +1,4 @@
-package com.example.moviedatabaseapp.controllers
+package com.example.moviedatabaseapp.ui.main
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

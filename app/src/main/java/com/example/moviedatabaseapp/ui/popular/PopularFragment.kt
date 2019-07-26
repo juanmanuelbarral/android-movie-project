@@ -1,4 +1,4 @@
-package com.example.moviedatabaseapp.views
+package com.example.moviedatabaseapp.ui.popular
 
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
@@ -11,9 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.moviedatabaseapp.R
-import com.example.moviedatabaseapp.adapters.PopularAdapter
-import com.example.moviedatabaseapp.controllers.PopularController
 import com.example.moviedatabaseapp.databinding.FragmentPopularBinding
+import com.example.moviedatabaseapp.ui.movie.MovieFragment
 
 class PopularFragment : Fragment() {
 

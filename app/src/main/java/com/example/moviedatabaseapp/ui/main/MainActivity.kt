@@ -1,9 +1,8 @@
-package com.example.moviedatabaseapp.views
+package com.example.moviedatabaseapp.ui.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.moviedatabaseapp.R
-import com.example.moviedatabaseapp.controllers.MovieController
 
 class MainActivity : AppCompatActivity() {
 

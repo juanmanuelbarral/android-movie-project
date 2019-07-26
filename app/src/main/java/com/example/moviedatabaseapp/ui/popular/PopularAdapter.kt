@@ -1,4 +1,4 @@
-package com.example.moviedatabaseapp.adapters
+package com.example.moviedatabaseapp.ui.popular
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
