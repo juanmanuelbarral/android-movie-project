@@ -13,15 +13,14 @@ class PopularViewModel: ViewModel(), PopularActionDelegate {
     val popularMovies: LiveData<List<Movie>>
         get() = _popularMovies
 
-    private val _navigateToMovie = MutableLiveData<Boolean>()
-    val navigateToMovie: LiveData<Boolean>
+    private val _navigateToMovie = MutableLiveData<Int>()
+    val navigateToMovie: LiveData<Int>
         get() = _navigateToMovie
 
-    var movieForNavigation: Movie? = null
 
     init {
         _popularMovies.value = listOf()
-        _navigateToMovie.value = false
+        _navigateToMovie.value = null
     }
 
     override fun onCleared() {
@@ -32,17 +31,13 @@ class PopularViewModel: ViewModel(), PopularActionDelegate {
     override fun onClickMovie(movie: Movie) {
         ModelManager.getMovieDetails(movie.movieId, onCompletion = { movieDetails, error ->
             if (movieDetails != null) {
-                Log.d("TestPopularCon", "onClickMovie - movie success")
                 // Trigger navigation and pass this movie to the movie module (fragment, controller)
-                movieForNavigation = movieDetails
-                _navigateToMovie.value = true
+                _navigateToMovie.value = movieDetails.movieId
 
             } else {
                 Log.d("TestPopularCon", "onClickMovie - There was an error: $error")
             }
         })
-
-        // La otra opción es pasar el movie id por bundle y que se busque la película después en el movie controller
     }
 
     fun loadPopularMovies() {
@@ -56,6 +51,6 @@ class PopularViewModel: ViewModel(), PopularActionDelegate {
     }
 
     fun onNavigationToMovieDone() {
-        _navigateToMovie.value = false
+        _navigateToMovie.value = null
     }
 }
