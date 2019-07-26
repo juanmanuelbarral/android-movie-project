@@ -1,12 +1,13 @@
 package com.example.moviedatabaseapp.ui.main
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import android.util.Log
 import com.example.moviedatabaseapp.model.ModelManager
 import com.example.moviedatabaseapp.model.data.Movie
 
-class MainFragmentController {
+class MainFragmentViewModel: ViewModel() {
 
     private val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie>
@@ -14,6 +15,11 @@ class MainFragmentController {
 
     init {
         _movie.value = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("MainFragmentViewModel", "onCleared called")
     }
 
     fun loadMovieDetais(movieId: Int) {

@@ -1,12 +1,13 @@
 package com.example.moviedatabaseapp.ui.popular
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import android.util.Log
 import com.example.moviedatabaseapp.model.ModelManager
 import com.example.moviedatabaseapp.model.data.Movie
 
-class PopularController: PopularActionDelegate {
+class PopularViewModel: ViewModel(), PopularActionDelegate {
 
     private val _popularMovies = MutableLiveData<List<Movie>>()
     val popularMovies: LiveData<List<Movie>>
@@ -21,6 +22,11 @@ class PopularController: PopularActionDelegate {
     init {
         _popularMovies.value = listOf()
         _navigateToMovie.value = false
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("PopularViewModel", "onCleared called")
     }
 
     override fun onClickMovie(movie: Movie) {

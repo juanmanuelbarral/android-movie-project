@@ -1,6 +1,7 @@
 package com.example.moviedatabaseapp.ui.popular
 
-import android.support.v7.widget.RecyclerView
+import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -9,7 +10,7 @@ import com.example.moviedatabaseapp.databinding.ItemMovieBinding
 import com.example.moviedatabaseapp.model.data.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolderA>() {
+class PopularAdapter: androidx.recyclerview.widget.RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolderA>() {
 
     private var data: List<Movie> = arrayListOf()
     private var actionDelegate: PopularActionDelegate? = null
@@ -39,12 +40,15 @@ class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolder
     }
 
     inner class PopularMovieViewHolderA constructor(private val binding: ItemMovieBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+        : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         private var movie: Movie? = null
 
         init {
-            binding.root.setOnClickListener {
+            itemView.setOnClickListener {
+                Log.i("PopularAdapter", "on click listener")
+                Log.i("PopularAdapter", "movie: ${movie?.title}")
+                Log.i("PopularAdapter", "action delegate: ${actionDelegate.toString()}")
                 if (movie != null && actionDelegate != null) {
                     actionDelegate!!.onClickMovie(movie!!)
                 }
@@ -62,7 +66,7 @@ class PopularAdapter: RecyclerView.Adapter<PopularAdapter.PopularMovieViewHolder
     }
 
     inner class PopularMovieViewHolder(inflater: LayoutInflater, private var parent: ViewGroup)
-        : RecyclerView.ViewHolder(inflater.inflate(R.layout.item_movie, parent, false)) {
+        : androidx.recyclerview.widget.RecyclerView.ViewHolder(inflater.inflate(R.layout.item_movie, parent, false)) {
 
         private var movie: Movie? = null
 
