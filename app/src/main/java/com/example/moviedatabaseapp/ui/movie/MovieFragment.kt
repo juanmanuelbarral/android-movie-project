@@ -49,7 +49,8 @@ class MovieFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.movie.observe(this, Observer { movie ->
-            configMovieData(movie)
+            if (movie != null)
+                configMovieData(movie)
         })
     }
 

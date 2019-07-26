@@ -58,7 +58,8 @@ class PopularFragment : Fragment() {
         })
 
         viewModel.navigateToMovie.observe(this, Observer { movieId ->
-            navigateToMovie(movieId)
+            if (movieId != null)
+                navigateToMovie(movieId)
         })
     }
 
