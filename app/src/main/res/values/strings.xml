@@ -7,4 +7,8 @@
     <string name="facebook_token">Facebook token: %s</string>
     <string name="facebook_is_logged_in">isLoggedIn</string>
     <string name="check_fb_status_button">Check FB status</string>
+    <string name="google_email">Google email: %s</string>
+    <string name="google_id">Google id: %s</string>
+    <string name="check_gg_status_button">Check GG status</string>
+    <string name="sign_out_gg">Sign out of Google</string>
 </resources>

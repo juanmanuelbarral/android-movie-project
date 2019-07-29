@@ -21,16 +21,18 @@
 
         <TextView
             android:id="@+id/facebookToken"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="15dp"
             android:text="@string/facebook_token"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
         <TextView
-            android:id="@+id/isLoggedInLabel"
+            android:id="@+id/isLoggedInFbLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -39,23 +41,69 @@
             app:layout_constraintTop_toBottomOf="@+id/facebookToken" />
 
         <ImageView
-            android:id="@+id/isLoggedInImage"
+            android:id="@+id/isLoggedInFbImage"
             android:layout_width="20dp"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
             android:background="@android:color/holo_red_light"
-            app:layout_constraintBottom_toBottomOf="@+id/isLoggedInLabel"
-            app:layout_constraintStart_toEndOf="@+id/isLoggedInLabel"
-            app:layout_constraintTop_toTopOf="@+id/isLoggedInLabel" />
+            app:layout_constraintBottom_toBottomOf="@+id/isLoggedInFbLabel"
+            app:layout_constraintStart_toEndOf="@+id/isLoggedInFbLabel"
+            app:layout_constraintTop_toTopOf="@+id/isLoggedInFbLabel" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            app:layout_constraintEnd_toEndOf="@+id/login_button"
+            app:layout_constraintStart_toStartOf="@+id/login_button"
+            app:layout_constraintTop_toBottomOf="@+id/isLoggedInFbLabel" />
+
+        <TextView
+            android:id="@+id/googleEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/google_email"
+            app:layout_constraintStart_toStartOf="@+id/isLoggedInFbLabel"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_button" />
+
+        <TextView
+            android:id="@+id/googleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/google_id"
+            app:layout_constraintStart_toStartOf="@+id/googleEmail"
+            app:layout_constraintTop_toBottomOf="@+id/googleEmail" />
+
+        <TextView
+            android:id="@+id/isLoggedInGgLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/facebook_is_logged_in"
+            app:layout_constraintStart_toStartOf="@+id/googleId"
+            app:layout_constraintTop_toBottomOf="@+id/googleId" />
+
+        <ImageView
+            android:id="@+id/isLoggedInGgImage"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:background="@android:color/holo_red_light"
+            app:layout_constraintBottom_toBottomOf="@+id/isLoggedInGgLabel"
+            app:layout_constraintStart_toEndOf="@+id/isLoggedInGgLabel"
+            app:layout_constraintTop_toTopOf="@+id/isLoggedInGgLabel" />
 
         <Button
-            android:id="@+id/checkFbStatusButton"
+            android:id="@+id/signOutGgButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/check_fb_status_button"
-            app:layout_constraintStart_toStartOf="@+id/isLoggedInLabel"
-            app:layout_constraintTop_toBottomOf="@+id/isLoggedInLabel" />
+            android:text="@string/sign_out_gg"
+            app:layout_constraintStart_toStartOf="@+id/isLoggedInGgLabel"
+            app:layout_constraintTop_toBottomOf="@+id/isLoggedInGgLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

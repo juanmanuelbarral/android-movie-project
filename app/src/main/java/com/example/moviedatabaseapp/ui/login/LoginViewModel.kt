@@ -7,28 +7,42 @@ import androidx.lifecycle.ViewModel
 import com.facebook.AccessToken
 import com.facebook.AccessTokenTracker
 import com.facebook.CallbackManager
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class LoginViewModel : ViewModel() {
 
     val callbackManager: CallbackManager = CallbackManager.Factory.create()
-    lateinit var accessTokenTracker: AccessTokenTracker
+    private val accessTokenTracker: AccessTokenTracker
+    val gso: GoogleSignInOptions
 
-    private val _accessToken = MutableLiveData<AccessToken>()
-    val accessToken: LiveData<AccessToken>
-        get() = _accessToken
+    private val _accessTokenFb = MutableLiveData<AccessToken>()
+    val accessTokenFb: LiveData<AccessToken>
+        get() = _accessTokenFb
 
-    private val _isLoggedIn = MutableLiveData<Boolean>()
-    val isLoggedIn: LiveData<Boolean>
-        get() = _isLoggedIn
+    private val _isLoggedInFb = MutableLiveData<Boolean>()
+    val isLoggedInFb: LiveData<Boolean>
+        get() = _isLoggedInFb
+
+    private val _googleAccount = MutableLiveData<GoogleSignInAccount>()
+    val googleAccount: LiveData<GoogleSignInAccount>
+        get() = _googleAccount
 
     init {
-        checkFacebookLoginStatus()
-        accessTokenTracker = object: AccessTokenTracker() {
+        // FACEBOOK
+        _accessTokenFb.value = AccessToken.getCurrentAccessToken()
+        _isLoggedInFb.value = _accessTokenFb.value != null && !_accessTokenFb.value!!.isExpired
+        accessTokenTracker = object : AccessTokenTracker() {
             override fun onCurrentAccessTokenChanged(oldAccessToken: AccessToken?, currentAccessToken: AccessToken?) {
-                _accessToken.value = currentAccessToken
-                _isLoggedIn.value = currentAccessToken != null && !currentAccessToken.isExpired
+                _accessTokenFb.value = currentAccessToken
+                _isLoggedInFb.value = currentAccessToken != null && !currentAccessToken.isExpired
             }
         }
+
+        // GOOGLE
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
     }
 
     override fun onCleared() {
@@ -36,8 +50,8 @@ class LoginViewModel : ViewModel() {
         Log.i("LoginViewModel", "onCleared called")
     }
 
-    fun checkFacebookLoginStatus() {
-        _accessToken.value = AccessToken.getCurrentAccessToken()
-        _isLoggedIn.value = _accessToken.value != null && !_accessToken.value!!.isExpired
+    fun setGoogleAccount(account: GoogleSignInAccount?) {
+        Log.i("GoogleLogin", "set google account - account != null: ${account != null}")
+        _googleAccount.value = account
     }
 }
