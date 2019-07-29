@@ -4,4 +4,7 @@
     <!--Facebook-->
     <string name="facebook_app_id">470385090458583</string>
     <string name="fb_login_protocol_scheme">fb470385090458583</string>
+    <string name="facebook_token">Facebook token: %s</string>
+    <string name="facebook_is_logged_in">isLoggedIn</string>
+    <string name="check_fb_status_button">Check FB status</string>
 </resources>
