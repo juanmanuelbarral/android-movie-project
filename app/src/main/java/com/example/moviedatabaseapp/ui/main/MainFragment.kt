@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.moviedatabaseapp.R
 import com.example.moviedatabaseapp.databinding.FragmentMainBinding
+import com.example.moviedatabaseapp.ui.login.LoginFragment
 import com.example.moviedatabaseapp.ui.popular.PopularFragment
 
 class MainFragment : Fragment() {
@@ -60,6 +61,14 @@ class MainFragment : Fragment() {
             // Navigation to PopularFragment
             fragmentManager!!.beginTransaction()
                 .replace(R.id.mainActivityContainer, PopularFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.goToLoginsButton.setOnClickListener {
+            // Navigation to LoginFragment
+            fragmentManager!!.beginTransaction()
+                .replace(R.id.mainActivityContainer, LoginFragment())
                 .addToBackStack(null)
                 .commit()
         }
